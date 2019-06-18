@@ -69,13 +69,13 @@ const RootQueryType = new GraphQLObjectType({
   fields: () => ({
     category: {
       type: CategoryType,
-      decription: "A singlecategory",
+      decription: "A single category",
       args: {
-        topic_id: { type: GraphQLString }
+        slug: { type: GraphQLString }
       },
       resolve(obj, args) {
-        return db.one("SELECT * FROM categories WHERE topic_id = $1", [
-          args.topic_id
+        return db.one("SELECT * FROM categories WHERE slug = $1", [
+          args.slug
         ]);
       }
     },
