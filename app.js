@@ -15,7 +15,7 @@ const pgp = require("pg-promise")();
 const cn = {
   host: "localhost",
   port: 5432,
-  database: "fencs" 
+  database: "fencs"
   // user: "charles",
   // password: "belgium7"
 };
@@ -262,6 +262,25 @@ const RootMutationType = new GraphQLObjectType({
         return db
           .result("DELETE FROM users WHERE username = $1 RETURNING *", [
             args.username
+          ])
+          .then(res => {
+            return res;
+          })
+          .catch(error => {
+            console.log("ERROR:", error); // print error;
+          });
+      }
+    },
+    deleteImage: {
+      type: ImageType,
+      description: "Delete an image",
+      args: {
+        image_id: { type: GraphQLID }
+      },
+      resolve(parent, args) {
+        return db
+          .result("DELETE FROM images WHERE image_id = $1 RETURNING *", [
+            args.image_id
           ])
           .then(res => {
             return res;
