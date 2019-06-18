@@ -11,10 +11,11 @@ const {
   GraphQLBoolean
 } = require("graphql");
 const { GraphQLDate } = require("graphql-iso-date");
+const pgp = require("pg-promise")();
+const db = pgp("postgres://localhost:5432/fencs");
 const app = express();
-const categories = require("./data/categories");
-const images = require("./data/images");
-const users = require("./data/users");
+
+console.log(db.one);
 
 const CategoryType = new GraphQLObjectType({
   name: "Categories",
@@ -22,13 +23,7 @@ const CategoryType = new GraphQLObjectType({
   fields: () => ({
     topic_id: { type: GraphQLID },
     slug: { type: GraphQLNonNull(GraphQLString) },
-    description: { type: GraphQLNonNull(GraphQLString) },
-    images: {
-      type: new GraphQLList(ImageType),
-      resolve: category => {
-        return images.filter(image => image.category === category.slug);
-      }
-    }
+    description: { type: GraphQLNonNull(GraphQLString) }
   })
 });
 
@@ -47,12 +42,7 @@ const ImageType = new GraphQLObjectType({
     obj_image_url: { type: GraphQLNonNull(GraphQLString) },
     format: { type: GraphQLString },
     likes: { type: GraphQLInt },
-    category: {
-      type: CategoryType,
-      resolve: image => {
-        return categories.find(category => category.slug === image.category);
-      }
-    }
+    category: { type: GraphQLString }
   })
 });
 
@@ -77,18 +67,24 @@ const RootQueryType = new GraphQLObjectType({
   name: "Query",
   description: "Root Query",
   fields: () => ({
-    // book: {
-    //   type: BookType,
-    //   decription: "A single book",
-    //   args: {
-    //     id: { type: GraphQLInt }
-    //   },
-    //   resolve: (parent, args) => books.find(book => book.id === args.id)
-    // },
+    category: {
+      type: CategoryType,
+      decription: "A singlecategory",
+      args: {
+        topic_id: { type: GraphQLString }
+      },
+      resolve(obj, args) {
+        return db.one("SELECT * FROM categories WHERE topic_id = $1", [
+          args.topic_id
+        ]);
+      }
+    },
     categories: {
       type: new GraphQLList(CategoryType),
       decription: "List of all categories",
-      resolve: () => categories
+      resolve(obj, args) {
+        return db.many("SELECT * FROM categories");
+      }
     },
     images: {
       type: new GraphQLList(ImageType),
