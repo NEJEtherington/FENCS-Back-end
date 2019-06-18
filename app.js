@@ -12,7 +12,14 @@ const {
 } = require("graphql");
 const BigInt = require("graphql-bigint");
 const pgp = require("pg-promise")();
-const db = pgp("postgres://localhost:5432/fencs");
+const cn = {
+  host: "localhost",
+  port: 5432,
+  database: "fencs",
+  user: "charles",
+  password: "belgium7"
+};
+const db = pgp(cn);
 const app = express();
 
 const CategoryType = new GraphQLObjectType({
@@ -145,7 +152,17 @@ const RootMutationType = new GraphQLObjectType({
         return db
           .one(
             "INSERT INTO users(username, fullname, email_address, date_joined, location, owns_printer, designer_tag, avatar, rating) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *",
-            [args.username, args.fullname, args.email_address, args.date_joined, args.location, args.owns_printer, args.designer_tag, args.avatar, args.rating]
+            [
+              args.username,
+              args.fullname,
+              args.email_address,
+              args.date_joined,
+              args.location,
+              args.owns_printer,
+              args.designer_tag,
+              args.avatar,
+              args.rating
+            ]
           )
           .then(data => {
             return data;
@@ -176,6 +193,46 @@ const RootMutationType = new GraphQLObjectType({
           });
       }
     },
+    addImage: {
+      type: ImageType,
+      description: "Add an image",
+      args: {
+        title: { type: GraphQLNonNull(GraphQLString) },
+        description: { type: GraphQLNonNull(GraphQLString) },
+        display_name: { type: GraphQLNonNull(GraphQLString) },
+        posted_by: { type: GraphQLNonNull(GraphQLString) },
+        date_uploaded: { type: BigInt },
+        price: { type: GraphQLInt },
+        thumbnail_url: { type: GraphQLNonNull(GraphQLString) },
+        obj_image_url: { type: GraphQLNonNull(GraphQLString) },
+        format: { type: GraphQLString },
+        category: { type: GraphQLString }
+      },
+      resolve(parent, args) {
+        return db
+          .one(
+            "INSERT INTO images(title, description, display_name, posted_by, date_uploaded, price, thumbnail_url, obj_image_url, format, category) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *",
+            [
+              args.title,
+              args.description,
+              args.display_name,
+              args.posted_by,
+              args.date_uploaded,
+              args.price,
+              args.thumbnail_url,
+              args.obj_image_url,
+              args.format,
+              args.category
+            ]
+          )
+          .then(data => {
+            return data;
+          })
+          .catch(error => {
+            console.log("ERROR:", error); // print error;
+          });
+      }
+    },
     deleteCategory: {
       type: CategoryType,
       description: "Delete a category",
@@ -184,9 +241,11 @@ const RootMutationType = new GraphQLObjectType({
       },
       resolve(parent, args) {
         return db
-          .result("DELETE FROM categories WHERE slug = $1 RETURNING *", [args.slug])
+          .result("DELETE FROM categories WHERE slug = $1 RETURNING *", [
+            args.slug
+          ])
           .then(res => {
-            return res
+            return res;
           })
           .catch(error => {
             console.log("ERROR:", error); // print error;
