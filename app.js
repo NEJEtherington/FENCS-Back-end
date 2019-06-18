@@ -10,7 +10,7 @@ const {
   GraphQLID,
   GraphQLBoolean
 } = require("graphql");
-const { GraphQLDate } = require("graphql-iso-date");
+const BigInt = require("graphql-bigint");
 const pgp = require("pg-promise")();
 const db = pgp("postgres://localhost:5432/fencs");
 const app = express();
@@ -36,7 +36,7 @@ const ImageType = new GraphQLObjectType({
     description: { type: GraphQLNonNull(GraphQLString) },
     display_name: { type: GraphQLNonNull(GraphQLString) },
     posted_by: { type: GraphQLNonNull(GraphQLString) },
-    date_uploaded: { type: GraphQLInt },
+    date_uploaded: { type: BigInt },
     price: { type: GraphQLInt },
     thumbnail_url: { type: GraphQLNonNull(GraphQLString) },
     obj_image_url: { type: GraphQLNonNull(GraphQLString) },
@@ -54,7 +54,7 @@ const UserType = new GraphQLObjectType({
     username: { type: GraphQLNonNull(GraphQLString) },
     forename: { type: GraphQLNonNull(GraphQLString) },
     email_address: { type: GraphQLNonNull(GraphQLString) },
-    date_joined: { type: GraphQLInt },
+    date_joined: { type: BigInt },
     location: { type: GraphQLNonNull(GraphQLString) },
     owns_printer: { type: GraphQLBoolean },
     designer_tag: { type: GraphQLBoolean },
@@ -74,9 +74,7 @@ const RootQueryType = new GraphQLObjectType({
         slug: { type: GraphQLString }
       },
       resolve(obj, args) {
-        return db.one("SELECT * FROM categories WHERE slug = $1", [
-          args.slug
-        ]);
+        return db.one("SELECT * FROM categories WHERE slug = $1", [args.slug]);
       }
     },
     categories: {
@@ -89,12 +87,16 @@ const RootQueryType = new GraphQLObjectType({
     images: {
       type: new GraphQLList(ImageType),
       decription: "List of all images",
-      resolve: () => images
+      resolve(obj, args) {
+        return db.many("SELECT * FROM images");
+      }
     },
     users: {
       type: new GraphQLList(UserType),
       decription: "List of all users",
-      resolve: () => users
+      resolve(obj, args) {
+        return db.many("SELECT * FROM users");
+      }
     }
     // author: {
     //   type: AuthorType,
