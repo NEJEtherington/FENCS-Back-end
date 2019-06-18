@@ -15,9 +15,9 @@ const pgp = require("pg-promise")();
 const cn = {
   host: "localhost",
   port: 5432,
-  database: "fencs",
-  user: "charles",
-  password: "belgium7"
+  database: "fencs" 
+  // user: "charles",
+  // password: "belgium7"
 };
 const db = pgp(cn);
 const app = express();
@@ -243,6 +243,25 @@ const RootMutationType = new GraphQLObjectType({
         return db
           .result("DELETE FROM categories WHERE slug = $1 RETURNING *", [
             args.slug
+          ])
+          .then(res => {
+            return res;
+          })
+          .catch(error => {
+            console.log("ERROR:", error); // print error;
+          });
+      }
+    },
+    deleteUser: {
+      type: UserType,
+      description: "Delete a user",
+      args: {
+        username: { type: GraphQLNonNull(GraphQLString) }
+      },
+      resolve(parent, args) {
+        return db
+          .result("DELETE FROM users WHERE username = $1 RETURNING *", [
+            args.username
           ])
           .then(res => {
             return res;
