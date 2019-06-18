@@ -15,7 +15,6 @@ const pgp = require("pg-promise")();
 const db = pgp("postgres://localhost:5432/fencs");
 const app = express();
 
-console.log(db.one);
 
 const CategoryType = new GraphQLObjectType({
   name: "Categories",
