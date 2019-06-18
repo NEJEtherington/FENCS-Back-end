@@ -15,12 +15,11 @@ const pgp = require("pg-promise")();
 const db = pgp("postgres://localhost:5432/fencs");
 const app = express();
 
-
 const CategoryType = new GraphQLObjectType({
   name: "Categories",
   description: "This represents the category of an image file",
   fields: () => ({
-    topic_id: { type: GraphQLID },
+    topic_id: { type: GraphQLInt },
     slug: { type: GraphQLNonNull(GraphQLString) },
     description: { type: GraphQLNonNull(GraphQLString) }
   })
@@ -30,7 +29,7 @@ const ImageType = new GraphQLObjectType({
   name: "Images",
   description: "This represents an image",
   fields: () => ({
-    image_id: { type: GraphQLID },
+    image_id: { type: GraphQLInt },
     title: { type: GraphQLNonNull(GraphQLString) },
     description: { type: GraphQLNonNull(GraphQLString) },
     display_name: { type: GraphQLNonNull(GraphQLString) },
@@ -49,9 +48,9 @@ const UserType = new GraphQLObjectType({
   name: "Users",
   description: "This represents an user",
   fields: () => ({
-    user_id: { type: GraphQLID },
+    user_id: { type: GraphQLInt },
     username: { type: GraphQLNonNull(GraphQLString) },
-    forename: { type: GraphQLNonNull(GraphQLString) },
+    fullname: { type: GraphQLNonNull(GraphQLString) },
     email_address: { type: GraphQLNonNull(GraphQLString) },
     date_joined: { type: BigInt },
     location: { type: GraphQLNonNull(GraphQLString) },
@@ -124,47 +123,82 @@ const RootQueryType = new GraphQLObjectType({
   })
 });
 
-// const RootMutationType = new GraphQLObjectType({
-//   name: "Mutation",
-//   description: "root mutation",
-//   fields: () => ({
-//     addUser: {
-//       type: UserType,
-//       description: "Add a user",
-//       args: {
-//         username: { type: GraphQLNonNull(GraphQLString) },
-//         forename: { type: GraphQLNonNull(GraphQLString) },
-//         email_address: { type: GraphQLNonNull(GraphQLString) },
-//         date_joined: { type: GraphQLDate },
-//         location: { type: GraphQLNonNull(GraphQLString) },
-//         owns_printer: { type: GraphQLBoolean },
-//         designer_tag: { type: GraphQLBoolean },
-//         avatar: { type: GraphQLString },
-//         rating: { type: GraphQLInt },
-//         images: {
-//           type: images,
-//           resolve: user => {
-//             return images.find(image => image.posted_by === user.username);
-//           }
-//         }
-//       },
-//       resolve: (parent, args) => {
-//         const user = {
-//           name: args.username,
-//           forename: args.forename,
-//           email_address: args.email_address
-
-//         };
-//         books.push(book);
-//         return book;
-//       }
-//     }
-//   })
-// });
+const RootMutationType = new GraphQLObjectType({
+  name: "Mutation",
+  description: "root mutation",
+  fields: () => ({
+    addUser: {
+      type: UserType,
+      description: "Add a user",
+      args: {
+        username: { type: GraphQLNonNull(GraphQLString) },
+        fullname: { type: GraphQLNonNull(GraphQLString) },
+        email_address: { type: GraphQLNonNull(GraphQLString) },
+        date_joined: { type: BigInt },
+        location: { type: GraphQLNonNull(GraphQLString) },
+        owns_printer: { type: GraphQLBoolean },
+        designer_tag: { type: GraphQLBoolean },
+        avatar: { type: GraphQLString },
+        rating: { type: GraphQLInt }
+      },
+      resolve(parent, args) {
+        return db
+          .one(
+            "INSERT INTO users(username, fullname, email_address, date_joined, location, owns_printer, designer_tag, avatar, rating) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *",
+            [args.username, args.fullname, args.email_address, args.date_joined, args.location, args.owns_printer, args.designer_tag, args.avatar, args.rating]
+          )
+          .then(data => {
+            return data;
+          })
+          .catch(error => {
+            console.log("ERROR:", error); // print error;
+          });
+      }
+    },
+    addCategory: {
+      type: CategoryType,
+      description: "Add a category",
+      args: {
+        slug: { type: GraphQLNonNull(GraphQLString) },
+        description: { type: GraphQLNonNull(GraphQLString) }
+      },
+      resolve(parent, args) {
+        return db
+          .one(
+            "INSERT INTO categories(slug, description) VALUES($1, $2) RETURNING *",
+            [args.slug, args.description]
+          )
+          .then(data => {
+            return data;
+          })
+          .catch(error => {
+            console.log("ERROR:", error); // print error;
+          });
+      }
+    },
+    deleteCategory: {
+      type: CategoryType,
+      description: "Delete a category",
+      args: {
+        slug: { type: GraphQLNonNull(GraphQLString) }
+      },
+      resolve(parent, args) {
+        return db
+          .result("DELETE FROM categories WHERE slug = $1 RETURNING *", [args.slug])
+          .then(res => {
+            return res
+          })
+          .catch(error => {
+            console.log("ERROR:", error); // print error;
+          });
+      }
+    }
+  })
+});
 
 const schema = new GraphQLSchema({
-  query: RootQueryType
-  // mutation: RootMutationType
+  query: RootQueryType,
+  mutation: RootMutationType
 });
 
 app.use(
