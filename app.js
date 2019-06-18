@@ -69,7 +69,7 @@ const RootQueryType = new GraphQLObjectType({
   fields: () => ({
     category: {
       type: CategoryType,
-      decription: "A single category",
+      description: "A single category",
       args: {
         slug: { type: GraphQLString }
       },
@@ -77,35 +77,51 @@ const RootQueryType = new GraphQLObjectType({
         return db.one("SELECT * FROM categories WHERE slug = $1", [args.slug]);
       }
     },
+    image: {
+      type: ImageType,
+      description: "A single image",
+      args: {
+        image_id: { type: GraphQLID }
+      },
+      resolve(obj, args) {
+        return db.one("SELECT * FROM images WHERE image_id = $1", [
+          args.image_id
+        ]);
+      }
+    },
+    user: {
+      type: UserType,
+      description: "A single user",
+      args: {
+        username: { type: GraphQLString }
+      },
+      resolve(obj, args) {
+        return db.one("SELECT * FROM users WHERE username = $1", [
+          args.username
+        ]);
+      }
+    },
     categories: {
       type: new GraphQLList(CategoryType),
-      decription: "List of all categories",
+      description: "List of all categories",
       resolve(obj, args) {
         return db.many("SELECT * FROM categories");
       }
     },
     images: {
       type: new GraphQLList(ImageType),
-      decription: "List of all images",
+      description: "List of all images",
       resolve(obj, args) {
         return db.many("SELECT * FROM images");
       }
     },
     users: {
       type: new GraphQLList(UserType),
-      decription: "List of all users",
+      description: "List of all users",
       resolve(obj, args) {
         return db.many("SELECT * FROM users");
       }
     }
-    // author: {
-    //   type: AuthorType,
-    //   decription: "A single author",
-    //   args: {
-    //     id: { type: GraphQLInt }
-    //   },
-    //   resolve: (parent, args) => authors.find(author => author.id === args.id)
-    // }
   })
 });
 
