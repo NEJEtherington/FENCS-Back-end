@@ -264,7 +264,7 @@ const RootMutationType = new GraphQLObjectType({
             args.username
           ])
           .then(res => {
-            console.log(res)
+            console.log(res);
             return res;
           })
           .catch(error => {
@@ -300,9 +300,30 @@ const RootMutationType = new GraphQLObjectType({
       },
       resolve(parent, args) {
         return db
-          .one("UPDATE users SET username = $1 WHERE user_id = $2 RETURNING *", [
+          .one(
+            "UPDATE users SET username = $1 WHERE user_id = $2 RETURNING *",
+            [args.newValue, args.user_id]
+          )
+          .then(res => {
+            return res;
+          })
+          .catch(error => {
+            console.log("ERROR:", error); // print error;
+          });
+      }
+    },
+    updateImage: {
+      type: ImageType,
+      description: "Update an image",
+      args: {
+        newValue: { type: GraphQLNonNull(GraphQLString) },
+        image_id: { type: GraphQLNonNull(GraphQLInt) }
+      },
+      resolve(parent, args) {
+        return db
+          .one("UPDATE images SET title = $1 WHERE image_id = $2 RETURNING *", [
             args.newValue,
-            args.user_id
+            args.image_id
           ])
           .then(res => {
             return res;
