@@ -126,6 +126,19 @@ const RootQueryType = new GraphQLObjectType({
       resolve(obj, args) {
         return db.many("SELECT * FROM users");
       }
+    },
+    imagesByCatagory: {
+      type: new GraphQLList(ImageType),
+      description: "List of all Images with a catagory",
+      args: { category: { type: GraphQLString } },
+      resolve(obj, args) {
+        return db
+          .many("SELECT * FROM images WHERE category = $1", [args.category])
+          .then(data => {
+            return data;
+          })
+          .catch(err => console.log(err));
+      }
     }
   })
 });
