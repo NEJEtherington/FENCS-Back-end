@@ -139,6 +139,19 @@ const RootQueryType = new GraphQLObjectType({
           })
           .catch(err => console.log(err));
       }
+    },
+    imagesByUser: {
+      type: new GraphQLList(ImageType),
+      description: "List of all images by user",
+      args: { username: { type: GraphQLString } },
+      resolve(obj, args) {
+        return db
+          .many("SELECT * FROM images WHERE posted_by = $1", [args.username])
+          .then(data => {
+            return data;
+          })
+          .catch(err => console.log(err));
+      }
     }
   })
 });
