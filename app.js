@@ -402,6 +402,29 @@ const RootMutationType = new GraphQLObjectType({
             console.log("ERROR:", error); // print error;
           });
       }
+    },
+    updateUserBools: {
+      type: UserType,
+      description: "Update a user",
+      args: {
+        valueToUpdate: { type: GraphQLString },
+        newValue: { type: GraphQLNonNull(GraphQLBoolean) },
+        user_id: { type: GraphQLNonNull(GraphQLInt) }
+      },
+      resolve(parent, args) {
+        return db
+          .one("UPDATE users SET $1:name = $2 WHERE user_id = $3 RETURNING *", [
+            args.valueToUpdate,
+            args.newValue,
+            args.user_id
+          ])
+          .then(res => {
+            return res;
+          })
+          .catch(error => {
+            console.log("ERROR:", error); // print error;
+          });
+      }
     }
   })
 });
