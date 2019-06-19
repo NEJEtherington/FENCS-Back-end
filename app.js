@@ -2,9 +2,10 @@ const { RootMutationType } = require("./rootMutation");
 
 const { RootQueryType } = require("./rootQuery");
 
-const {GraphQLSchema} = require("graphql")
+const { GraphQLSchema } = require("graphql");
 const express = require("express");
 const expressGraphQl = require("express-graphql");
+const EasyGraphQLTester = require("easygraphql-tester");
 const app = express();
 
 const schema = new GraphQLSchema({
@@ -22,3 +23,5 @@ app.use(
 app.listen(4000, () => {
   console.log("listening for requests on port 4000...");
 });
+
+exports.schema = schema
