@@ -321,15 +321,16 @@ const RootMutationType = new GraphQLObjectType({
       type: ImageType,
       description: "Update an image",
       args: {
+        valueToChange: { type: GraphQLNonNull(GraphQLString) },
         newValue: { type: GraphQLNonNull(GraphQLString) },
         image_id: { type: GraphQLNonNull(GraphQLInt) }
       },
       resolve(parent, args) {
         return db
-          .one("UPDATE images SET title = $1 WHERE image_id = $2 RETURNING *", [
-            args.newValue,
-            args.image_id
-          ])
+          .one(
+            "UPDATE images SET $1:name = $2 WHERE image_id = $3 RETURNING *",
+            [args.valueToChange, args.newValue, args.image_id]
+          )
           .then(res => {
             return res;
           })
