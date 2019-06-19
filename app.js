@@ -358,7 +358,28 @@ const RootMutationType = new GraphQLObjectType({
             console.log("ERROR:", error); // print error;
           });
       }
-    }
+    },
+    updateCategory: {
+      type: CategoryType,
+      description: "Update a category",
+      args: {
+        newValue: { type: GraphQLNonNull(GraphQLString) }, 
+        topic_id: { type: GraphQLNonNull(GraphQLInt) }
+      },
+resolve(parent, args) {
+  return db
+  .one("UPDATE categories SET slug = $1 WHERE topic_id = $2 RETURNING *", [
+    args.newValue,
+    args.topic_id
+  ])
+  .then(res => {
+    return res;
+  })
+  .catch(error => {
+    console.log("ERROR:", error);
+  })
+}
+      }
   })
 });
 
