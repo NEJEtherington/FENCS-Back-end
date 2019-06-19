@@ -343,14 +343,15 @@ const RootMutationType = new GraphQLObjectType({
       type: CategoryType,
       description: "Update a category",
       args: {
+        valueToUpdate: { type: GraphQLNonNull(GraphQLString) },
         newValue: { type: GraphQLNonNull(GraphQLString) },
         topic_id: { type: GraphQLNonNull(GraphQLInt) }
       },
       resolve(parent, args) {
         return db
           .one(
-            "UPDATE categories SET slug = $1 WHERE topic_id = $2 RETURNING *",
-            [args.newValue, args.topic_id]
+            "UPDATE categories SET $1:name = $2 WHERE topic_id = $3 RETURNING *",
+            [args.valueToUpdate, args.newValue, args.topic_id]
           )
           .then(res => {
             return res;
