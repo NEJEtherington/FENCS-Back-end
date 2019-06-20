@@ -6,6 +6,7 @@ const {
   GraphQLBoolean
 } = require("graphql");
 const BigInt = require("graphql-bigint");
+const { GraphQLDate } = require("graphql-iso-date");
 
 const CategoryType = new GraphQLObjectType({
   name: "Categories",
@@ -27,7 +28,7 @@ const ImageType = new GraphQLObjectType({
     description: { type: GraphQLNonNull(GraphQLString) },
     display_name: { type: GraphQLNonNull(GraphQLString) },
     posted_by: { type: GraphQLNonNull(GraphQLString) },
-    date_uploaded: { type: BigInt },
+    date_uploaded: { type: GraphQLDate },
     price: { type: GraphQLInt },
     thumbnail_url: { type: GraphQLNonNull(GraphQLString) },
     obj_image_url: { type: GraphQLNonNull(GraphQLString) },
@@ -45,7 +46,7 @@ const UserType = new GraphQLObjectType({
     username: { type: GraphQLNonNull(GraphQLString) },
     fullname: { type: GraphQLNonNull(GraphQLString) },
     email_address: { type: GraphQLNonNull(GraphQLString) },
-    date_joined: { type: BigInt },
+    date_joined: { type: GraphQLDate },
     location: { type: GraphQLNonNull(GraphQLString) },
     owns_printer: { type: GraphQLBoolean },
     designer_tag: { type: GraphQLBoolean },

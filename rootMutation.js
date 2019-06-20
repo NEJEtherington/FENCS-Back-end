@@ -21,7 +21,6 @@ const RootMutationType = new GraphQLObjectType({
         username: { type: GraphQLNonNull(GraphQLString) },
         fullname: { type: GraphQLNonNull(GraphQLString) },
         email_address: { type: GraphQLNonNull(GraphQLString) },
-        date_joined: { type: BigInt },
         location: { type: GraphQLNonNull(GraphQLString) },
         owns_printer: { type: GraphQLBoolean },
         designer_tag: { type: GraphQLBoolean },
@@ -31,7 +30,7 @@ const RootMutationType = new GraphQLObjectType({
       resolve(parent, args) {
         return db
           .one(
-            "INSERT INTO users(username, fullname, email_address, date_joined, location, owns_printer, designer_tag, avatar, rating) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *",
+            "INSERT INTO users(username, fullname, email_address, location, owns_printer, designer_tag, avatar, rating) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *",
             [
               args.username,
               args.fullname,
@@ -81,7 +80,6 @@ const RootMutationType = new GraphQLObjectType({
         description: { type: GraphQLNonNull(GraphQLString) },
         display_name: { type: GraphQLNonNull(GraphQLString) },
         posted_by: { type: GraphQLNonNull(GraphQLString) },
-        date_uploaded: { type: BigInt },
         price: { type: GraphQLInt },
         thumbnail_url: { type: GraphQLNonNull(GraphQLString) },
         obj_image_url: { type: GraphQLNonNull(GraphQLString) },
@@ -91,7 +89,7 @@ const RootMutationType = new GraphQLObjectType({
       resolve(parent, args) {
         return db
           .one(
-            "INSERT INTO images(title, description, display_name, posted_by, date_uploaded, price, thumbnail_url, obj_image_url, format, category) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *",
+            "INSERT INTO images(title, description, display_name, posted_by, price, thumbnail_url, obj_image_url, format, category) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *",
             [
               args.title,
               args.description,
