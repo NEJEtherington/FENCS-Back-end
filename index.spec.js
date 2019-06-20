@@ -9,6 +9,10 @@ describe("Test queries and mutations", () => {
     tester = new EasyGraphQLTester(schema);
   });
 
+  after(() => {
+    process.exit();
+  });
+
   describe("queries on images path", () => {
     it("returns false if passed an invalid query on images", () => {
       const invalidQuery = `
@@ -16,7 +20,7 @@ describe("Test queries and mutations", () => {
           image_id
           date_uploaded
           price
-          whoitwaspostedby
+          invalidField
         }}
       `;
       // First arg: false, there is no invalidField on the schema.
