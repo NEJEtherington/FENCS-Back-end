@@ -2,9 +2,10 @@
   "name": "fencs-back-end",
   "version": "1.0.0",
   "description": "Back end repo for the FENCS designer commerce site",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha index.spec.js",
+    "start": "nodemon app.js"
   },
   "repository": {
     "type": "git",
@@ -17,13 +18,20 @@
   },
   "homepage": "https://github.com/NEJEtherington/FENCS-Back-end#readme",
   "dependencies": {
+    "easygraphql-tester": "^5.1.5",
     "express": "^4.17.1",
     "express-graphql": "^0.8.0",
     "graphql": "^14.3.1",
-    "jest": "^24.8.0",
-    "psql": "0.0.1"
+    "graphql-bigint": "^1.0.0",
+    "graphql-iso-date": "^3.6.1",
+    "pg": "^7.11.0",
+    "pg-promise": "^8.7.2"
   },
   "devDependencies": {
-    "nodemon": "^1.19.1"
+    "chai": "^4.2.0",
+    "jest": "^24.8.0",
+    "just-api": "^1.2.4",
+    "nodemon": "^1.19.1",
+    "supertest": "^4.0.2"
   }
 }
