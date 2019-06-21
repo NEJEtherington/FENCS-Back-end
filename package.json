@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/NEJEtherington/FENCS-Back-end#readme",
   "dependencies": {
+    "cors": "^2.8.5",
     "easygraphql-tester": "^5.1.5",
     "express": "^4.17.1",
     "express-graphql": "^0.8.0",
