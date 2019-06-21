@@ -65,6 +65,7 @@ VALUES
   ('tech', 'Gadgets, gizmos and devices', 'https:
 //images.unsplash.com/photo-1531297484001-80022131f5a1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1414&q=80');
 
+
 INSERT INTO users
   (username, fullname, email_address, date_joined, location, owns_printer, designer_tag, avatar, rating)
 VALUES
