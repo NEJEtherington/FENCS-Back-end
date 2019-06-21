@@ -13,7 +13,8 @@ const CategoryType = new GraphQLObjectType({
   fields: () => ({
     topic_id: { type: GraphQLInt },
     slug: { type: GraphQLNonNull(GraphQLString) },
-    description: { type: GraphQLNonNull(GraphQLString) }
+    description: { type: GraphQLNonNull(GraphQLString) },
+    img_url: { type: GraphQLNonNull(GraphQLString) }
   })
 });
 exports.CategoryType = CategoryType;
