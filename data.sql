@@ -82,14 +82,14 @@ VALUES
 INSERT INTO images
   (title, description, display_name, posted_by, date_uploaded, price, thumbnail_url, obj_image_url, format, category)
 VALUES
-  ('Safe', 'A sturdy safe for storing precious items', 'lizzyk', '2019-06-13', 0, 'https://dl.dropboxusercontent.com/s/gux00o21r1dj61f/antiqueironsafe.png?dl=0', 'https://dl.dropboxusercontent.com/s/drp9tjtqjpc4lw8/out.glb?dl=0', 'glb', 'objects'
+  ('Safe', 'A sturdy safe for storing precious items', 'safe', 'lizzyk', '2019-06-13', 0, 'https://dl.dropboxusercontent.com/s/gux00o21r1dj61f/antiqueironsafe.png?dl=0', 'https://dl.dropboxusercontent.com/s/drp9tjtqjpc4lw8/out.glb?dl=0', 'glb', 'objects'
 ),
-  ('Skull', 'A head bone', 'nejetherington', '2019-06-13', 0, 'https://dl.dropboxusercontent.com/s/ssh77gl7b6afpyh/Screenshot%202019-06-24%2012.14.36.png?dl=0', 'https://dl.dropboxusercontent.com/s/7d4ayvnel7u9ikt/skull.glb?dl=0', 'glb', 'people'),
-  ('Cube', 'A simple cube', 'Cube', 'lizzyk', '2019-06-13', 0, 'https://dl.dropboxusercontent.com/s/7h78ork0itwggld/Screenshot%202019-06-24%2012.23.22.png?dl=0', 'https://dl.dropboxusercontent.com/s/kj3xa7aybu8247m/cube.glb?dl=0', 'glb', 'shapes'),
-  ('Hammer', 'An old hammer', 'fraserkemp', '2019-06-13', 0, 'https://dl.dropboxusercontent.com/s/lpnprxfsg1plur1/hammer.png?dl=0', 'https://dl.dropboxusercontent.com/s/s6h7j11rukhzu76/hammer.glb?dl=0', 'glb', 'objects'),
-  ('Penguin', 'A majestic emperor penguin', 'shiva19173', '2019-06-13', 0, 'https://dl.dropboxusercontent.com/s/1hq5x1uzvpmtu99/emperorpenguin.png?dl=0', 'https://dl.dropboxusercontent.com/s/jr1u917pry6zrro/penguin.glb?dl=0', 'glb', 'animals'),
-  ('Smoking man', 'A man lighting a cigarette', 'fraserkemp', '2019-06-13', 0, 'https://dl.dropboxusercontent.com/s/5uprs5sil9p6p6y/Screenshot%202019-06-24%2012.11.25.png?dl=0', 'https://dl.dropboxusercontent.com/s/bca7nxi6vhrf3zj/smokingman.glb?dl=0', 'glb', 'people'),
-  ('Stones', 'A pile of stones', 'shiva19173', '2019-06-13', 0, 'https://dl.dropboxusercontent.com/s/2egr9bwbsb01b93/freestones.png?dl=0', 'https://dl.dropboxusercontent.com/s/1ysjff7c22kdueg/stones.glb?dl=0', 'glb', 'nature'),
-  ('Turtle', 'A snapping turtle laying eggs', 'cpbattrick', '2019-06-13', 0, 'https://dl.dropboxusercontent.com/s/614eg8heq5lc9cc/Screenshot%202019-06-24%2012.09.41.png?dl=0', 'https://dl.dropboxusercontent.com/s/baagzbeplynbcxd/turtle.glb?dl=0)', 'glb', 'animals'),
-  ('Pi', 'Our pi logo!', '2019-06-13', 'nejetherington', 0, 'https://dl.dropboxusercontent.com/s/u235fosyc91mov4/pi.png?dl=0', 'https://dl.dropboxusercontent.com/s/dtzx4e0iivesmlq/pi.glb?dl=0');
+  ('Skull', 'A head bone', 'skull', 'nejetherington', '2019-06-13', 0, 'https://dl.dropboxusercontent.com/s/ssh77gl7b6afpyh/Screenshot%202019-06-24%2012.14.36.png?dl=0', 'https://dl.dropboxusercontent.com/s/7d4ayvnel7u9ikt/skull.glb?dl=0', 'glb', 'people'),
+  ('Cube', 'A simple cube', 'cube', 'lizzyk', '2019-06-13', 0, 'https://dl.dropboxusercontent.com/s/7h78ork0itwggld/Screenshot%202019-06-24%2012.23.22.png?dl=0', 'https://dl.dropboxusercontent.com/s/kj3xa7aybu8247m/cube.glb?dl=0', 'glb', 'shapes'),
+  ('Hammer', 'An old hammer', 'hammer', 'fraserkemp', '2019-06-13', 0, 'https://dl.dropboxusercontent.com/s/lpnprxfsg1plur1/hammer.png?dl=0', 'https://dl.dropboxusercontent.com/s/s6h7j11rukhzu76/hammer.glb?dl=0', 'glb', 'objects'),
+  ('Penguin', 'A majestic emperor penguin', 'penguin', 'shiva19173', '2019-06-13', 0, 'https://dl.dropboxusercontent.com/s/1hq5x1uzvpmtu99/emperorpenguin.png?dl=0', 'https://dl.dropboxusercontent.com/s/jr1u917pry6zrro/penguin.glb?dl=0', 'glb', 'animals'),
+  ('Smoking man', 'A man lighting a cigarette', 'smoking man', 'fraserkemp', '2019-06-13', 0, 'https://dl.dropboxusercontent.com/s/5uprs5sil9p6p6y/Screenshot%202019-06-24%2012.11.25.png?dl=0', 'https://dl.dropboxusercontent.com/s/bca7nxi6vhrf3zj/smokingman.glb?dl=0', 'glb', 'people'),
+  ('Stones', 'A pile of stones', 'stones', 'shiva19173', '2019-06-13', 0, 'https://dl.dropboxusercontent.com/s/2egr9bwbsb01b93/freestones.png?dl=0', 'https://dl.dropboxusercontent.com/s/1ysjff7c22kdueg/stones.glb?dl=0', 'glb', 'nature'),
+  ('Turtle', 'A snapping turtle laying eggs', 'turtle', 'cpbattrick', '2019-06-13', 0, 'https://dl.dropboxusercontent.com/s/614eg8heq5lc9cc/Screenshot%202019-06-24%2012.09.41.png?dl=0', 'https://dl.dropboxusercontent.com/s/baagzbeplynbcxd/turtle.glb?dl=0)', 'glb', 'animals'),
+  ('Pi', 'Our pi logo!', 'pi', 'nejetherington', '2019-06-13', 0, 'https://dl.dropboxusercontent.com/s/u235fosyc91mov4/pi.png?dl=0', 'https://dl.dropboxusercontent.com/s/dtzx4e0iivesmlq/pi.glb?dl=0', 'glb', 'shapes');
   
