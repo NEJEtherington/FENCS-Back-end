@@ -82,9 +82,14 @@ VALUES
 INSERT INTO images
   (title, description, display_name, posted_by, date_uploaded, price, thumbnail_url, obj_image_url, format, category)
 VALUES
-  ('Cube', 'A simple white cube', 'Cube', 'lizzyk', '2019-06-13', 0, 'https://media.sketchfab.com/urls/cc49b01d97e24a9989c8cbc75c418c0e/dist/thumbnails/ad9caea573f645dfbd42342b42ba6b77/5649afe244cb44f5bc9bc9ce9e9add2b.jpeg', 'https://sketchfab.com/models/cc49b01d97e24a9989c8cbc75c418c0e/embed', 'obj', 'shapes'),
-  ('Chap', 'A white blobby chap with a moustache', 'Moustache chap', 'fraserkemp', '2019-06-13', 0, 'https://media.sketchfab.com/urls/b197e61c969a45ab971ae17e1b465b05/dist/thumbnails/b1ac83ed821c4098a968997c14033abc/7928c7ce63a74e2e8c9c8b55f6cadd63.jpeg', 'https://sketchfab.com/models/b197e61c969a45ab971ae17e1b465b05/embed', 'obj', 'people'),
-  ('Dogtag', 'A nice shiny dogtag', 'Dogtag', 'fraserkemp', '2019-06-13', 0, 'https://media.sketchfab.com/urls/2ff47d9471a44b24bf54280c64e75b63/dist/thumbnails/fe38e5dd2bfe4f6ebd6cf698c8526b82/8ef25f73a59e4c5ca71dfa3625c27640.jpeg', 'https://sketchfab.com/models/2ff47d9471a44b24bf54280c64e75b63/embed', 'obj', 'objects'),
-  ('Shell', 'A beautiful shell on a sandy beach', 'Sea shell', 'shiva19173', '2019-06-13', 25, 'https://media.sketchfab.com/urls/488e08875aed49fcad02c8012c4f892f/dist/thumbnails/dfdb5173b16b45078a57f5273539fcaa/484953e31d9d48f9b79efb6db0d59c3f.jpeg', 'https://sketchfab.com/models/488e08875aed49fcad02c8012c4f892f/embed', 'obj', 'objects'),
-  ('Slinky', 'A majestic slinky', 'Slinky', 'lizzyk', '2019-06-13', 0, 'https://static.turbosquid.com/Preview/001295/482/3Q/_D.jpg', 'https://www.turbosquid.com/3d-models/3d-slinky-metal-rainbow-model-1295482', 'obj', 'objects'),
-  ('Toast', 'A pile of slices of white toast', 'Toast slices', 'lizzyk', '2019-06-13', 0, 'https://static.turbosquid.com/Preview/2019/05/30__23_45_15/toasts02_01.pngFE423239-4498-46E3-8C5B-5747669FA9C4Default.jpg', 'https://www.turbosquid.com/FullPreview/Index.cfm/ID/1411908', 'obj', 'shapes');
+  ('Safe', 'A sturdy safe for storing precious items', '2019-06-13', 0, 'https://dl.dropboxusercontent.com/s/gux00o21r1dj61f/antiqueironsafe.png?dl=0', 'https://dl.dropboxusercontent.com/s/drp9tjtqjpc4lw8/out.glb?dl=0', 'glb', 'objects'
+),
+  ('Skull', 'A head bone', '2019-06-13', 0, 'https://dl.dropboxusercontent.com/s/ssh77gl7b6afpyh/Screenshot%202019-06-24%2012.14.36.png?dl=0', 'https://dl.dropboxusercontent.com/s/7d4ayvnel7u9ikt/skull.glb?dl=0', 'glb', 'people'),
+  ('Cube', 'A simple cube', 'Cube', 'lizzyk', '2019-06-13', 0, 'https://dl.dropboxusercontent.com/s/7h78ork0itwggld/Screenshot%202019-06-24%2012.23.22.png?dl=0', 'https://dl.dropboxusercontent.com/s/kj3xa7aybu8247m/cube.glb?dl=0', 'glb', 'shapes'),
+  ('Hammer', 'An old hammer', '2019-06-13', 0, 'https://dl.dropboxusercontent.com/s/lpnprxfsg1plur1/hammer.png?dl=0', 'https://dl.dropboxusercontent.com/s/s6h7j11rukhzu76/hammer.glb?dl=0', 'glb', 'objects'),
+  ('Penguin', 'A majestic emperor penguin', '2019-06-13', 0, 'https://dl.dropboxusercontent.com/s/1hq5x1uzvpmtu99/emperorpenguin.png?dl=0', 'https://dl.dropboxusercontent.com/s/jr1u917pry6zrro/penguin.glb?dl=0', 'glb', 'animals'),
+  ('Smoking man', 'A man lighting a cigarette', '2019-06-13', 0, 'https://dl.dropboxusercontent.com/s/5uprs5sil9p6p6y/Screenshot%202019-06-24%2012.11.25.png?dl=0', 'https://dl.dropboxusercontent.com/s/bca7nxi6vhrf3zj/smokingman.glb?dl=0', 'glb', 'people'),
+  ('Stones', 'A pile of stones', '2019-06-13', 0, 'https://dl.dropboxusercontent.com/s/2egr9bwbsb01b93/freestones.png?dl=0', 'https://dl.dropboxusercontent.com/s/1ysjff7c22kdueg/stones.glb?dl=0', 'glb', 'nature'),
+  ('Turtle', 'A snapping turtle laying eggs', '2019-06-13', 0, 'https://dl.dropboxusercontent.com/s/614eg8heq5lc9cc/Screenshot%202019-06-24%2012.09.41.png?dl=0', 'https://dl.dropboxusercontent.com/s/baagzbeplynbcxd/turtle.glb?dl=0)', 'glb', 'animals'),
+  ('Pi', 'Our pi logo!', '2019-06-13', 0, 'https://dl.dropboxusercontent.com/s/u235fosyc91mov4/pi.png?dl=0', 'https://dl.dropboxusercontent.com/s/dtzx4e0iivesmlq/pi.glb?dl=0');
+  
